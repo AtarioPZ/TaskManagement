@@ -28,6 +28,12 @@
                             {% endfor %}
                         </div>
                     {% endif %}
+
+                    {% if error_message %}
+                        <div class="alert alert-danger text-center" role="alert">
+                            {{ error_message }}
+                        </div>
+                    {% endif %}
                 
 
                     <p class="text-center">Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
