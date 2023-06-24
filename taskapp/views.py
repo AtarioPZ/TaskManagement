@@ -17,13 +17,10 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-           try:
-                # Login user
-                login(request, user)
-                # Redirect to dashboard page
+           try:                
+                login(request, user)                
                 return redirect('dashboard')
            except OperationalError:
-                # Database connection error
                 error_message = 'Failed to connect to the database.'
                 return render(request, 'login.html', {'error_message': error_message})
         else:           
