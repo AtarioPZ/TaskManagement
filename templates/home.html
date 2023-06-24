@@ -2,10 +2,110 @@
 
 {% block body %}
 <div class="container py-2">
-    <h1>APP</h1>
+    <section class="banner">
+        <div class="container text-center">
+            <h1>Task Management Made Easy</h1>
+            <p>Efficiently manage your tasks, collaborate with your team, and boost productivity.</p>
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}" class="btn btn-primary">Go to Dashboard</a>
+            {% else %}
+                <a href="#signup" class="btn btn-primary">Get Started</a>
+            {% endif %}
+        </div>
+    </section>
+
+    <br />
+
+    <section id="features" class="py-5" style="background-color: #c8c7a4;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="feature-icon fas fa-tasks"></i>
+                            <h3>Task Management</h3>
+                            <p>Easily organize and manage your tasks with detailed descriptions, deadlines, and priorities.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="feature-icon fas fa-users"></i>
+                            <h3>Notifications</h3>
+                            <p>Receive notifications and reminders to stay updated on task deadlines and important updates.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="feature-icon fas fa-clock"></i>
+                            <h3>Task Completion</h3>
+                            <p>Mark tasks as complete, track progress, and achieve your goals efficiently.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br />
+
+    <section id="how-it-works" class="py-5" style="background-color: #b5c7a4;">
+        <div class="container">
+            <h2 class="text-center mb-4">How It Works</h2>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="text-center">
+                        <img src="step1.png" alt="Step 1" class="img-fluid rounded-circle" style="max-width: 200px;">
+                        <h4>Step 1</h4>
+                        <p>Create an account and log in to the task management system.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="text-center">
+                        <img src="step2.png" alt="Step 2" class="img-fluid rounded-circle" style="max-width: 200px;">
+                        <h4>Step 2</h4>
+                        <p>Create tasks, set status and deadlines.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="text-center">
+                        <img src="step3.png" alt="Step 3" class="img-fluid rounded-circle" style="max-width: 200px;">
+                        <h4>Step 3</h4>
+                        <p>...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <br />
+
+    {% if not user.is_authenticated %}
+        <section id="signup" class="py-5" style="background-color: #5768a4;">
+            <div class="container">
+                <div class="text-center">
+                    <h2>Ready to Get Started?</h2>
+                    <p>Sign up for our task management system and experience the difference!</p>
+                    <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </section>
+    {% endif %}
 </div>
 
+<script>    
+    document.addEventListener('DOMContentLoaded', function() {
+        const getStartedBtn = document.querySelector('a[href="#signup"]');
+        const signupSection = document.getElementById('signup');
 
+        getStartedBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            signupSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+</script>
 {% endblock body %}
-
-
