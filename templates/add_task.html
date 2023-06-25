@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container py-2">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Add Task</h2>
+                    <hr />
+                    <form action="{% url 'add_task' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-fields text-center">
+                            {% for field in form %}
+                                <div class="mb-3">
+                                    {{ field.errors }}
+                                    {{ field }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

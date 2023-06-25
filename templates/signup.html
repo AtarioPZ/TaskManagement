@@ -7,21 +7,34 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title text-center">Sign Up</h2>
-                    <form>
+                    {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                    <form action="{% url 'signup' %}" method="post">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirm_email" class="form-label">Confirm Email</label>
+                            <input type="email" class="form-control" id="confirm_email" name="confirm_email" placeholder="Confirm your email">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
                         </div>
-                        <button type="submit" class="btn btn-primary" onclick="showNotification()">Sign Up</button>
+                        <div class="mb-3">
+                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm your password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
                     </form>
                     <p class="text-center">Already have an account? <a href="{% url 'user_login' %}">Login</a></p>
                 </div>
@@ -29,10 +42,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    function showNotification() {
-        alert("Functionality is being worked on");
-    }
-</script>
 {% endblock body %}
