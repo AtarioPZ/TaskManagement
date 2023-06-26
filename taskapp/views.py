@@ -6,6 +6,10 @@ from django.db import OperationalError
 from .models import Task
 from .forms import TaskForm
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+
 
 # Create your views here.
 def home(request):
@@ -30,6 +34,38 @@ def user_login(request):
             messages.error(request, 'Invalid username or password.')
         
     return render(request, 'login.html')
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.instance)  # Update session to prevent log out
+            messages.success(request, 'Profile information successfully updated.')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Invalid form submission.')
+    else:
+        form = UserChangeForm(instance=request.user)
+    
+    return render(request, 'update_profile.html', {'form': form})
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Update session to prevent log out
+            messages.success(request, 'Password successfully changed.')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Invalid form submission.')
+    else:
+        form = PasswordChangeForm(request.user)
+    
+    return render(request, 'change_password.html', {'form': form})
 
 def user_logout(request):
     logout(request)
@@ -90,3 +126,6 @@ def delete_task(request, task_id):
     task = Task.objects.get(id=task_id)
     task.delete()
     return redirect('dashboard')
+
+def profile(request):
+    return render(request, 'profile.html')

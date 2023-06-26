@@ -16,6 +16,9 @@ urlpatterns = [
     path('add/', views.add_task, name='add_task'),
     path('edit/<int:task_id>/', views.edit_task, name='edit_task'),
     path('delete/<int:task_id>/', views.delete_task, name='delete_task'),
+    path("profile/", views.profile, name='profile'),
+    path('update_profile/', views.update_profile, name='update_profile'),
+    path('change_password/', views.change_password, name='change_password'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
