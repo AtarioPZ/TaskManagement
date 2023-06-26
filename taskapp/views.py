@@ -94,7 +94,8 @@ def signup(request):
         return redirect('user_login')
     else:
         return render(request, 'signup.html')
-    
+
+@login_required    
 def dashboard(request):
     tasks = Task.objects.filter(user=request.user)
     return render(request, 'dashboard.html', {'tasks': tasks})
@@ -127,5 +128,9 @@ def delete_task(request, task_id):
     task.delete()
     return redirect('dashboard')
 
+@login_required
 def profile(request):
     return render(request, 'profile.html')
+
+def custom_404_view(request, exception):
+    return render(request, '404.html', status=404)

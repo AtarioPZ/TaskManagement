@@ -5,6 +5,8 @@ TASK APP
 from django.urls import path
 from taskapp import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.auth.decorators import login_required
+from taskapp.views import custom_404_view
 
 urlpatterns = [
     path("", views.home, name='home'),
@@ -19,6 +21,9 @@ urlpatterns = [
     path("profile/", views.profile, name='profile'),
     path('update_profile/', views.update_profile, name='update_profile'),
     path('change_password/', views.change_password, name='change_password'),
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()
+
+handler404 = custom_404_view
