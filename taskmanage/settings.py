@@ -1,11 +1,12 @@
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-u9rbj6c$(+r-xx6ff^t95y6zwok_d_lvr6pcq*n=^z&sef%45k'
+SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = False
 
