@@ -4,11 +4,5 @@ venv/
 # Ignore the database file
 db.sqlite3
 
-# Ignore the static files
-/static/
-
-# Ignore media files
-/media/
-
 # Ignore the .env file
 .env
